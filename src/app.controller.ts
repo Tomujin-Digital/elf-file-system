@@ -15,12 +15,13 @@ export class AppController {
   }
 
   @Get("read/:key")
-  async getFile(@Response() res:any, @Param("key") key: string) {
-    const fileFromS3 = await this.appService.readFromS3(key);
+  async getFile(@Response() res: any, @Param("key") key: string) {
+    let file: any = this.appService.readFromLocal(key);
+    if (!file) file = await this.appService.readFromS3(key);
 
     // convert to image response
     res.set("Content-Type", "image/jpeg");
-    return res.send(fileFromS3.Body);
+    return res.send(file.Body);
   }
 
   @Post("upload")
