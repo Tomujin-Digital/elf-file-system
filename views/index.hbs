@@ -58,12 +58,12 @@
         imageUrl.innerHTML = `<a class="resultLink" href="${res.data.imgLink}" target="_blank">${res.data.imgLink}</a>
           <img width="100%" src="${res.data.imgLink}" alt="image" class="resultImg">;
         `;
+        submit.disabled = false;
         console.log(res);
       }).catch((err) => {
-        console.log(err);
-      }).finally(() => {
         submit.disabled = false;
-      });
+        console.log(err);
+      })
       e.preventDefault();
     });
   </script>
