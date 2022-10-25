@@ -20,7 +20,7 @@ export class AppController {
     if (!file) file = await this.appService.readFromS3(key);
 
     // convert to image response
-    res.set("Content-Type", "image/jpeg");
+    // res.set("Content-Type", "image/jpeg");
     return res.send(file.Body);
   }
 
