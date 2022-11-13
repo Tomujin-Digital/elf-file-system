@@ -13,7 +13,7 @@
   <form class="fileUpload">
     <input type="file" class="fileElem">
     <ul class="fileList">
-      
+
     </ul>
     <label class="fileSelect">Upload File</label>
     <button id="submit">Submit</button>
@@ -38,7 +38,7 @@
       e.preventDefault(); // prevent navigation to "#"
     }, false);
     fileElem.addEventListener('change', (e) => {
-      if(fileElem.files.length < 1) {
+      if (fileElem.files.length < 1) {
         fileList.innerHTML = '';
         submit.style.display = 'none';
         return;
@@ -50,6 +50,7 @@
 
     submit.addEventListener('click', (e) => {
       submit.disabled = true;
+      submit.innerHTML = 'Loading...';
       axios.post('/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -58,9 +59,11 @@
         imageUrl.innerHTML = `<a class="resultLink" href="${res.data.imgLink}" target="_blank">${res.data.imgLink}</a>
           <img width="100%" src="${res.data.imgLink}" alt="image" class="resultImg">;
         `;
+        submit.innerHTML = 'Submit';
         submit.disabled = false;
         console.log(res);
       }).catch((err) => {
+        submit.innerHTML = 'Submit';
         submit.disabled = false;
         console.log(err);
       })

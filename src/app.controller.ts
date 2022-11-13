@@ -19,8 +19,6 @@ export class AppController {
     let file: any = this.appService.readFromLocal(key);
     if (!file) file = await this.appService.readFromS3(key);
 
-    // convert to image response
-    // res.set("Content-Type", "image/jpeg");
     return res.send(file.Body);
   }
 
